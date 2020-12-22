@@ -2,7 +2,6 @@ package com.adphilip.conf.conference.models;
 
 import java.util.List;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import lombok.Data;
 
 @Data
 @Entity(name = "sessions") // "sessions" - DB table
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Session {
  
     //not need to be annotated;
@@ -38,6 +39,7 @@ public class Session {
     List<Speaker> speakers;
 
     public Session() {
+        //default constructor
     }
     
 }

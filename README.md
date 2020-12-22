@@ -1,5 +1,5 @@
 # conference
-
+First run docker command:
  docker start postgres-demo
 
 Stop container:

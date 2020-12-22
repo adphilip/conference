@@ -31,7 +31,7 @@ public class SessionsController {
 
     @GetMapping
     @RequestMapping("{id}")
-    public Session get(@PathVariable Integer id) {
+    public Session get(@PathVariable Long id) {
         return sessionRepository.getOne(id);
     }
 
@@ -41,12 +41,12 @@ public class SessionsController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Integer id) {
+    public void delete(@PathVariable Long id) {
         sessionRepository.deleteById(id);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public Session update(@PathVariable Integer id, @RequestBody final Session session){
+    public Session update(@PathVariable Long id, @RequestBody final Session session){
 
         //TODO - validation for params
         Session sessionUpdated =  sessionRepository.getOne(id);
@@ -55,9 +55,4 @@ public class SessionsController {
         return sessionRepository.saveAndFlush(sessionUpdated);
     }
 
-    // @PostMapping
-    // @ResponseStatus(HttpStatus.CREATED)
-    // public Session create(@RequestBody final Session session){
-    //     return sessionRepository.saveAndFlush(session);
-    // }
 }

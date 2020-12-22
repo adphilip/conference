@@ -9,11 +9,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 @RestController
 @RequestMapping("api/v1/speakers")
@@ -29,21 +29,26 @@ public List<Speaker> list(){
 
 @GetMapping
 @RequestMapping("{id}")
-public Speaker get(@PathVariable Integer id) {
+public Speaker get(@PathVariable Long id) {
     return speakerRepository.getOne(id);
 }
 
-@RequestMapping("id")
-public void delete(@PathVariable Integer id){
+@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+public void delete(@PathVariable Long id) {
     speakerRepository.deleteById(id);
 }
 
-@RequestMapping(value = "id", method = RequestMethod.PUT)
-public Speaker update(@PathVariable Integer id, Speaker speaker){
+@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+public Speaker update(@PathVariable Long id, @RequestBody final Speaker speaker){
     Speaker updatedSpeaker = speakerRepository.getOne(id);
     BeanUtils.copyProperties(speaker, updatedSpeaker, "speaker_id");
 
     return speakerRepository.saveAndFlush(updatedSpeaker);
+}
+
+@PostMapping
+public Speaker create(@RequestBody final Speaker speaker){
+    return speakerRepository.saveAndFlush(speaker);
 }
 
 }
