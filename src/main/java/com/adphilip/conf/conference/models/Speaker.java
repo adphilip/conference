@@ -11,11 +11,9 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import lombok.Data;
 
-//import org.hibernate.annotations.Type;
 
 @Data
 @Entity(name="speakers")
